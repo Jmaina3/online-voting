@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Voting System</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Online Voting System</h1>
+    </header>
+    <main>
+        <form action="/initiate_election" method="post">
+            <label for="election_name">Enter the name of the election:</label>
+            <input type="text" id="election_name" name="election_name" required>
+            <button type="submit">Initiate Election</button>
+        </form>
+    </main>
+</body>
+</html>

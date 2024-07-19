@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Candidates</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Submit Candidates for {{ election.name }}</h1>
+    </header>
+    <main>
+        <form action="/submit_candidates" method="post" enctype="multipart/form-data">
+            <label for="candidate1_name">Enter the name of the first candidate:</label>
+            <input type="text" id="candidate1_name" name="candidate1_name" required>
+            <input type="file" id="candidate1_photo" name="candidate1_photo" accept="image/*" required>
+            <label for="candidate2_name">Enter the name of the second candidate:</label>
+            <input type="text" id="candidate2_name" name="candidate2_name" required>
+            <input type="file" id="candidate2_photo" name="candidate2_photo" accept="image/*" required>
+            <button type="submit">Submit Candidates</button>
+        </form>
+    </main>
+</body>
+</html>

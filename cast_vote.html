@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cast Vote</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Cast Your Vote</h1>
+    </header>
+    <main>
+        <form action="/submit_vote" method="post">
+            <label for="voter_id">Enter your Voter ID:</label>
+            <input type="number" id="voter_id" name="voter_id" required>
+            <label>Select the candidate you want to vote for:</label>
+            {% for candidate in candidates %}
+                <div>
+                    <input type="radio" id="candidate{{ loop.index }}" name="candidate" value="{{ loop.index }}" required>
+                    <label for="candidate{{ loop.index }}">
+                        <img src="{{ url_for('static', filename=candidate.photo) }}" alt="{{ candidate.name }}" width="100">
+                        {{ candidate.name }}
+                    </label>
+                </div>
+            {% endfor %}
+            <button type="submit">Cast Vote</button>
+        </form>
+    </main>
+</body>
+</html>

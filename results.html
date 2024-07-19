@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Election Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Election Results</h1>
+    </header>
+    <main>
+        <h2>Results for {{ voting_system.election.name }}</h2>
+        <ul>
+            {% for candidate in candidates %}
+                <li>
+                    <img src="{{ url_for('static', filename=candidate.photo) }}" alt="{{ candidate.name }}" width="100">
+                    {{ candidate.name }}: {{ candidate.votes }} votes ({{ '%.2f' % ((candidate.votes / total_votes) * 100) }}%)
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>Total Votes: {{ total_votes }}</h3>
+        {% set max_votes = max(candidates, key=lambda c: c.votes).votes %}
+        {% set winners = [c for c in candidates if c.votes == max_votes] %}
+        {% if winners | length > 1 %}
+            <h3>It's a tie between:</h3>
+            <ul>
+                {% for winner in winners %}
+                    <li>{{ winner.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>{{ winners[0].name }} has won the election!</h3>
+        {% endif %}
+    </main>
+</body>
+</html>
